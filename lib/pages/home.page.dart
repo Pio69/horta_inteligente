@@ -5,12 +5,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF1A1A27),
         title: Center(
           child: SizedBox(
-            width: 100,
-            child: Image.asset(
-                "C:/Users/Pio/Workspace/Flutter/Projetos/horta_inteligente/lib/assets/Logo.png"),
+            width: 150,
+            child: Text('Leonardo Pio'),
           ),
         ),
       ),

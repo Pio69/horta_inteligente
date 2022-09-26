@@ -58,6 +58,7 @@ class LoginPage extends StatelessWidget {
                   child: Text(
                     "Esqueceu a senha?",
                     textAlign: TextAlign.right,
+                    style: TextStyle(color: Color(0xFF1A1A27)),
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -73,44 +74,23 @@ class LoginPage extends StatelessWidget {
                 height: 40,
               ),
               Container(
-                height: 60,
-                alignment: Alignment.centerLeft,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: [0.3, 1],
-                    colors: [
-                      Color(0xFF1A1A27),
-                      Color(0XFF1A1A27),
-                    ],
+                margin: EdgeInsets.all(25),
+                child: TextButton(
+                  child: Text(
+                    'Entrar',
+                    style: TextStyle(fontSize: 20.0, color: Colors.white),
                   ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
+                  style: TextButton.styleFrom(
+                    backgroundColor: Color(0xFF1A1A27),
                   ),
-                ),
-                child: SizedBox.expand(
-                  child: TextButton(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text("Entrar",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 20,
-                            )),
-                      ],
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ),
-                      );
-                    },
-                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
