@@ -39,7 +39,7 @@ class InitialPage extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 110,
+              height: 90,
             ),
             Text(
               "DESENVOLVIDO POR",

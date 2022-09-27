@@ -1,7 +1,12 @@
+import 'dart:developer';
+
 import 'reset-password.page.dart';
 import 'home.page.dart';
 import 'signup.page.dart';
 import 'package:flutter/material.dart';
+
+import 'package:http_pro/http.dart' as http;
+import 'package:http_pro/response.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -83,13 +88,17 @@ class LoginPage extends StatelessWidget {
                   style: TextButton.styleFrom(
                     backgroundColor: Color(0xFF1A1A27),
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    );
+                  onPressed: () async {
+                    Future<String?> res =
+                        _apiCall("user@example.com", "12345678");
+                    if (res != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        ),
+                      );
+                    }
                   },
                 ),
               ),
@@ -98,5 +107,16 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+Future<String?> _apiCall(String email, String password) async {
+  Response res = await http.post(
+    "https://smartgarden.onlosant.com/login?email=${email}&password=${password}",
+  );
+  if (res.statusCode == 200 || res.statusCode == 302) {
+    return res.headers[1];
+  } else {
+    return null;
   }
 }
