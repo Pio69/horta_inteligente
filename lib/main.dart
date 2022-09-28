@@ -1,10 +1,16 @@
 import 'package:horta_inteligente/pages/initial.page.dart';
-
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import './pages/login.page.dart';
 
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  runApp(MyApp());
+
+  FlutterNativeSplash.remove();
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -16,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.black,
       ),
-      home: InitialPage(),
+      home: LoginPage(),
     );
   }
 }
