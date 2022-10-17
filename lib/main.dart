@@ -1,3 +1,4 @@
+import 'package:horta_inteligente/pages/events.page.dart';
 import 'package:horta_inteligente/pages/initial.page.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import './pages/login.page.dart';
