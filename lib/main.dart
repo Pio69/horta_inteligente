@@ -1,10 +1,17 @@
+import 'package:horta_inteligente/pages/events.page.dart';
 import 'package:horta_inteligente/pages/initial.page.dart';
-
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import './pages/login.page.dart';
 
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  runApp(MyApp());
+
+  FlutterNativeSplash.remove();
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -20,13 +27,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-/* @override
-void initState() {
- Timer(Duration(seconds: 3), (){
-Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> 
- HomeScreen()));
-});
- super.initState();
-}*/

@@ -1,16 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:horta_inteligente/pages/data.page.dart';
+import 'package:horta_inteligente/pages/events.page.dart';
 
-class HomePage extends StatelessWidget {
+void main() {
+  runApp(const TabBarDemo());
+}
+
+class TabBarDemo extends StatelessWidget {
+  const TabBarDemo({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Center(
-          child: SizedBox(
-            width: 100,
-            child: Image.asset(
-                "C:/Users/Pio/Workspace/Flutter/Projetos/horta_inteligente/lib/assets/Logo.png"),
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            leading: Navigator.canPop(context)
+                ? IconButton(
+                    icon: Icon(
+                      Icons.arrow_back,
+                      size: 25,
+                    ),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
+                : null,
+            bottom: const TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.data_thresholding)),
+                Tab(icon: Icon(Icons.apps_outage)),
+              ],
+            ),
+            title: Text(
+              "Horta Inteligente",
+              textAlign: TextAlign.center,
+            ),
+            centerTitle: true,
+            backgroundColor: Color(0xFF1A1A27),
+          ),
+          body: const TabBarView(
+            children: [
+              DataPage(),
+              EventsPage(),
+            ],
           ),
         ),
       ),

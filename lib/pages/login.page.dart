@@ -1,7 +1,15 @@
+import 'dart:developer';
+
 import 'reset-password.page.dart';
 import 'home.page.dart';
 import 'signup.page.dart';
 import 'package:flutter/material.dart';
+
+import 'package:http_pro/http.dart' as http;
+import 'package:http_pro/response.dart';
+
+TextEditingController login = TextEditingController();
+TextEditingController password = TextEditingController();
 
 class LoginPage extends StatelessWidget {
   @override
@@ -14,6 +22,9 @@ class LoginPage extends StatelessWidget {
           child: ListView(
             children: <Widget>[
               SizedBox(
+                height: 100,
+              ),
+              SizedBox(
                 width: 128,
                 height: 128,
                 child: Image.asset("assets/images/Logo.png"),
@@ -24,6 +35,7 @@ class LoginPage extends StatelessWidget {
               TextFormField(
                 // autofocus: true,
                 keyboardType: TextInputType.emailAddress,
+                controller: login,
                 decoration: InputDecoration(
                   labelText: "Digite o e-mail",
                   labelStyle: TextStyle(
@@ -33,6 +45,12 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 style: TextStyle(fontSize: 14),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Insira o email';
+                  }
+                  return null;
+                },
               ),
               SizedBox(
                 height: 10,
@@ -41,6 +59,7 @@ class LoginPage extends StatelessWidget {
                 // autofocus: true,
                 keyboardType: TextInputType.text,
                 obscureText: true,
+                controller: password,
                 decoration: InputDecoration(
                   labelText: "Digite a senha",
                   labelStyle: TextStyle(
@@ -50,6 +69,12 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 style: TextStyle(fontSize: 14),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Insira a senha';
+                  }
+                  return null;
+                },
               ),
               Container(
                 height: 40,
@@ -58,6 +83,7 @@ class LoginPage extends StatelessWidget {
                   child: Text(
                     "Esqueceu a senha?",
                     textAlign: TextAlign.right,
+                    style: TextStyle(color: Color(0xFF1A1A27)),
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -73,44 +99,26 @@ class LoginPage extends StatelessWidget {
                 height: 40,
               ),
               Container(
-                height: 60,
-                alignment: Alignment.centerLeft,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: [0.3, 1],
-                    colors: [
-                      Color(0xFF1A1A27),
-                      Color(0XFF1A1A27),
-                    ],
+                margin: EdgeInsets.all(25),
+                child: TextButton(
+                  child: Text(
+                    'Entrar',
+                    style: TextStyle(fontSize: 20.0, color: Colors.white),
                   ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
+                  style: TextButton.styleFrom(
+                    backgroundColor: Color(0xFF1A1A27),
                   ),
-                ),
-                child: SizedBox.expand(
-                  child: TextButton(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text("Entrar",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 20,
-                            )),
-                      ],
-                    ),
-                    onPressed: () {
+                  onPressed: () async {
+                    Future<String?> res = _apiCall(login.text, password.text);
+                    if (await res != null) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => HomePage(),
+                          builder: (context) => TabBarDemo(),
                         ),
                       );
-                    },
-                  ),
+                    }
+                  },
                 ),
               ),
             ],
@@ -118,5 +126,16 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+Future<String?> _apiCall(String email, String password) async {
+  Response res = await http.post(
+    "https://smartgarden.onlosant.com/login?email=${email}&password=${password}",
+  );
+  if (res.statusCode == 200 || res.statusCode == 302) {
+    return res.headers["set-cookie"];
+  } else {
+    return null;
   }
 }
