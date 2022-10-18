@@ -24,10 +24,6 @@ class _DataPageState extends State<DataPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Leonardo Pio'),
-      ),
       body: Column(
         children: [
           Expanded(
@@ -40,26 +36,73 @@ class _DataPageState extends State<DataPage> {
                   return Card(
                     child: Column(
                       children: [
-                        ReusbaleRow(
-                          title: 'Temperatura do Ar',
-                          value: this.data["airSensor"][0]["value"].toString(),
+                        Card(
+                          child: Column(
+                            children: [
+                              ListTile(
+                                title: const Text('Temperatura do Ar'),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(
+                                  '${this.data["airSensor"][0]["value"].toString()}°C',
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.6)),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        ReusbaleRow(
-                          title: 'Umidade do Ar',
-                          value: this
-                              .data["humiditySensor"][0]["value"]
-                              .toString(),
+                        Card(
+                          child: Column(
+                            children: [
+                              ListTile(
+                                title: const Text('Umidade do Ar'),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(
+                                  '${this.data["humiditySensor"][0]["value"].toString()}%',
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.6)),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        ReusbaleRow(
-                          title: 'Luminosidade',
-                          value:
-                              this.data["lightSensor"][0]["value"].toString(),
+                        Card(
+                          child: Column(
+                            children: [
+                              ListTile(
+                                title: const Text('Luminosidade'),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(
+                                  '${(double.parse(this.data["lightSensor"][0]["value"].toString()) * 100).toString()}%',
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.6)),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        ReusbaleRow(
-                          title: 'Umidade do solo',
-                          value: this
-                              .data["soilMoistureSensor"][0]["value"]
-                              .toString(),
+                        Card(
+                          child: Column(
+                            children: [
+                              ListTile(
+                                title: const Text('Umidade do solo'),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(
+                                  '${this.data["soilMoistureSensor"][0]["value"].toString()}%',
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.6)),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -68,26 +111,6 @@ class _DataPageState extends State<DataPage> {
               },
             ),
           )
-        ],
-      ),
-    );
-  }
-}
-
-class ReusbaleRow extends StatelessWidget {
-  String title, value;
-  ReusbaleRow({Key? key, required this.title, required this.value})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(title),
-          Text(value),
         ],
       ),
     );

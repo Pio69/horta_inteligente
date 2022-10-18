@@ -3,14 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class ExampleFour extends StatefulWidget {
-  const ExampleFour({Key? key}) : super(key: key);
+class EventsPage extends StatefulWidget {
+  const EventsPage({Key? key}) : super(key: key);
 
   @override
-  _ExampleFourState createState() => _ExampleFourState();
+  _EventsPageState createState() => _EventsPageState();
 }
 
-class _ExampleFourState extends State<ExampleFour> {
+class _EventsPageState extends State<EventsPage> {
   var data;
   Future<void> getUserApi() async {
     final response = await http
@@ -24,10 +24,6 @@ class _ExampleFourState extends State<ExampleFour> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Eventos'),
-      ),
       body: Column(
         children: [
           Expanded(
@@ -43,17 +39,50 @@ class _ExampleFourState extends State<ExampleFour> {
                         return Card(
                           child: Column(
                             children: [
-                              ReusbaleRow(
-                                title: 'Nivel',
-                                value: data[index]['level'].toString(),
-                              ),
-                              ReusbaleRow(
-                                title: 'Descrição',
-                                value: data[index]['message'].toString(),
-                              ),
-                              ReusbaleRow(
-                                title: 'status',
-                                value: data[index]['status'].toString(),
+                              Card(
+                                child: Column(
+                                  children: [
+                                    ListTile(
+                                      title: (data[index]['level'].toString() ==
+                                              "warning")
+                                          ? Icon(
+                                              Icons.error,
+                                              color: Colors.deepOrange,
+                                              size: 30.0,
+                                            )
+                                          : Icon(
+                                              Icons.report,
+                                              color: Colors.red,
+                                              size: 30.0,
+                                            ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Text(
+                                        (data[index]['message'].toString()),
+                                        style: TextStyle(
+                                            color:
+                                                Colors.black.withOpacity(0.6)),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child:
+                                          (data[index]['status'].toString() ==
+                                                  "new")
+                                              ? Icon(
+                                                  Icons.new_releases,
+                                                  color: Colors.lightBlue,
+                                                  size: 30.0,
+                                                )
+                                              : Icon(
+                                                  Icons.verified,
+                                                  color: Colors.grey,
+                                                  size: 30.0,
+                                                ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -63,83 +92,6 @@ class _ExampleFourState extends State<ExampleFour> {
               },
             ),
           )
-        ],
-      ),
-    );
-  }
-}
-
-class ReusbaleRow extends StatelessWidget {
-  String title, value;
-  ReusbaleRow({Key? key, required this.title, required this.value})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    if (value == "warning") {
-      return Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-                constraints: BoxConstraints(minWidth: 100, maxWidth: 250),
-                padding: EdgeInsets.all(5),
-                child: Text(title)),
-            Container(
-              constraints: BoxConstraints(minWidth: 100, maxWidth: 250),
-              padding: EdgeInsets.all(5),
-              child: Icon(
-                Icons.error,
-                color: Colors.yellow,
-                size: 30.0,
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-
-    if (value == "new") {
-      return Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-                constraints: BoxConstraints(minWidth: 100, maxWidth: 250),
-                padding: EdgeInsets.all(5),
-                child: Text(title)),
-            Container(
-              constraints: BoxConstraints(minWidth: 100, maxWidth: 250),
-              padding: EdgeInsets.all(5),
-              child: Icon(
-                Icons.auto_awesome,
-                color: Colors.blue,
-                size: 30.0,
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-
-    return Padding(
-      padding: const EdgeInsets.all(1.0),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-              constraints: BoxConstraints(minWidth: 100, maxWidth: 250),
-              padding: EdgeInsets.all(5),
-              child: Text(title)),
-          Container(
-              constraints: BoxConstraints(minWidth: 100, maxWidth: 250),
-              padding: EdgeInsets.all(5),
-              child: Text(value)),
         ],
       ),
     );

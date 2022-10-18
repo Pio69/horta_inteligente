@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:horta_inteligente/pages/data.page.dart';
+import 'package:horta_inteligente/pages/events.page.dart';
 
 void main() {
   runApp(const TabBarDemo());
@@ -14,18 +16,32 @@ class TabBarDemo extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
+            leading: Navigator.canPop(context)
+                ? IconButton(
+                    icon: Icon(
+                      Icons.arrow_back,
+                      size: 25,
+                    ),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
+                : null,
             bottom: const TabBar(
               tabs: [
-                Tab(icon: Icon(Icons.directions_car)),
-                Tab(icon: Icon(Icons.directions_transit)),
+                Tab(icon: Icon(Icons.data_thresholding)),
+                Tab(icon: Icon(Icons.apps_outage)),
               ],
             ),
-            title: const Text('Tabs Demo'),
+            title: Text(
+              "Horta Inteligente",
+              textAlign: TextAlign.center,
+            ),
+            centerTitle: true,
+            backgroundColor: Color(0xFF1A1A27),
           ),
           body: const TabBarView(
             children: [
-              Icon(Icons.directions_car),
-              Icon(Icons.directions_transit),
+              DataPage(),
+              EventsPage(),
             ],
           ),
         ),
