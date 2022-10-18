@@ -27,13 +27,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-/* @override
-void initState() {
- Timer(Duration(seconds: 3), (){
-Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> 
- HomeScreen()));
-});
- super.initState();
-}*/
