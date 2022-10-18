@@ -2,4 +2,8 @@
 
 Aplicativo IOT desenvolvido em Dart e Flutter.
 
-## Getting Started
+## Funcionalidades
+
+-Requisições HTTP
+-Conexão com a plataforma Losant
+-Apresentação de dados
