@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:http_pro/http.dart' as http;
 import 'package:http_pro/response.dart';
 
+TextEditingController login = TextEditingController();
+TextEditingController password = TextEditingController();
+
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -32,6 +35,7 @@ class LoginPage extends StatelessWidget {
               TextFormField(
                 // autofocus: true,
                 keyboardType: TextInputType.emailAddress,
+                controller: login,
                 decoration: InputDecoration(
                   labelText: "Digite o e-mail",
                   labelStyle: TextStyle(
@@ -41,6 +45,12 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 style: TextStyle(fontSize: 14),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Insira o email';
+                  }
+                  return null;
+                },
               ),
               SizedBox(
                 height: 10,
@@ -49,6 +59,7 @@ class LoginPage extends StatelessWidget {
                 // autofocus: true,
                 keyboardType: TextInputType.text,
                 obscureText: true,
+                controller: password,
                 decoration: InputDecoration(
                   labelText: "Digite a senha",
                   labelStyle: TextStyle(
@@ -58,6 +69,12 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 style: TextStyle(fontSize: 14),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Insira a senha';
+                  }
+                  return null;
+                },
               ),
               Container(
                 height: 40,
@@ -92,9 +109,8 @@ class LoginPage extends StatelessWidget {
                     backgroundColor: Color(0xFF1A1A27),
                   ),
                   onPressed: () async {
-                    Future<String?> res =
-                        _apiCall("user@example.com", "12345678");
-                    if (res != null) {
+                    Future<String?> res = _apiCall(login.text, password.text);
+                    if (await res != null) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -118,7 +134,7 @@ Future<String?> _apiCall(String email, String password) async {
     "https://smartgarden.onlosant.com/login?email=${email}&password=${password}",
   );
   if (res.statusCode == 200 || res.statusCode == 302) {
-    return res.headers[1];
+    return res.headers["set-cookie"];
   } else {
     return null;
   }

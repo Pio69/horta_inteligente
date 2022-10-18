@@ -41,14 +41,19 @@ class _DataPageState extends State<DataPage> {
                             child: Column(
                               children: [
                                 ListTile(
-                                  title: const Text('Temperatura do Ar'),
+                                  title: const Text(
+                                    'Temperatura do Ar',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Icon(
                                     Icons.device_thermostat,
                                     color: Colors.deepOrange,
-                                    size: 30.0,
+                                    size: 35.0,
                                   ),
                                 ),
                                 Padding(
@@ -56,7 +61,9 @@ class _DataPageState extends State<DataPage> {
                                   child: Text(
                                     '${this.data["airSensor"][0]["value"].toString()}°C',
                                     style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6)),
+                                      color: Colors.black.withOpacity(0.6),
+                                      fontSize: 20,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -66,14 +73,19 @@ class _DataPageState extends State<DataPage> {
                             child: Column(
                               children: [
                                 ListTile(
-                                  title: const Text('Umidade do Ar'),
+                                  title: const Text(
+                                    'Umidade do Ar',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Icon(
                                     Icons.water_drop,
                                     color: Colors.blue,
-                                    size: 30.0,
+                                    size: 35.0,
                                   ),
                                 ),
                                 Padding(
@@ -81,7 +93,9 @@ class _DataPageState extends State<DataPage> {
                                   child: Text(
                                     '${this.data["humiditySensor"][0]["value"].toString()}%',
                                     style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6)),
+                                      color: Colors.black.withOpacity(0.6),
+                                      fontSize: 20,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -91,14 +105,19 @@ class _DataPageState extends State<DataPage> {
                             child: Column(
                               children: [
                                 ListTile(
-                                  title: const Text('Luminosidade'),
+                                  title: const Text(
+                                    'Luminosidade',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Icon(
                                     Icons.light_mode,
                                     color: Colors.yellow[800],
-                                    size: 30.0,
+                                    size: 35.0,
                                   ),
                                 ),
                                 Padding(
@@ -106,7 +125,9 @@ class _DataPageState extends State<DataPage> {
                                   child: Text(
                                     '${(double.parse(this.data["lightSensor"][0]["value"].toString()) * 100).toString()}%',
                                     style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6)),
+                                      color: Colors.black.withOpacity(0.6),
+                                      fontSize: 20,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -116,14 +137,19 @@ class _DataPageState extends State<DataPage> {
                             child: Column(
                               children: [
                                 ListTile(
-                                  title: const Text('Umidade do solo'),
+                                  title: const Text(
+                                    'Umidade do solo',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Icon(
                                     Icons.opacity,
                                     color: Colors.brown,
-                                    size: 30.0,
+                                    size: 35.0,
                                   ),
                                 ),
                                 Padding(
@@ -131,7 +157,9 @@ class _DataPageState extends State<DataPage> {
                                   child: Text(
                                     '${this.data["soilMoistureSensor"][0]["value"].toString()}%',
                                     style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6)),
+                                      color: Colors.black.withOpacity(0.6),
+                                      fontSize: 20,
+                                    ),
                                   ),
                                 ),
                               ],
