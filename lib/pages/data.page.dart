@@ -34,77 +34,111 @@ class _DataPageState extends State<DataPage> {
                   return Text('Loading');
                 } else {
                   return Card(
-                    child: Column(
-                      children: [
-                        Card(
-                          child: Column(
-                            children: [
-                              ListTile(
-                                title: const Text('Temperatura do Ar'),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Text(
-                                  '${this.data["airSensor"][0]["value"].toString()}°C',
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6)),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Card(
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  title: const Text('Temperatura do Ar'),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Card(
-                          child: Column(
-                            children: [
-                              ListTile(
-                                title: const Text('Umidade do Ar'),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Text(
-                                  '${this.data["humiditySensor"][0]["value"].toString()}%',
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6)),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Icon(
+                                    Icons.device_thermostat,
+                                    color: Colors.deepOrange,
+                                    size: 30.0,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Card(
-                          child: Column(
-                            children: [
-                              ListTile(
-                                title: const Text('Luminosidade'),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Text(
-                                  '${(double.parse(this.data["lightSensor"][0]["value"].toString()) * 100).toString()}%',
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6)),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    '${this.data["airSensor"][0]["value"].toString()}°C',
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.6)),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Card(
-                          child: Column(
-                            children: [
-                              ListTile(
-                                title: const Text('Umidade do solo'),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Text(
-                                  '${this.data["soilMoistureSensor"][0]["value"].toString()}%',
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6)),
+                          Card(
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  title: const Text('Umidade do Ar'),
                                 ),
-                              ),
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Icon(
+                                    Icons.water_drop,
+                                    color: Colors.blue,
+                                    size: 30.0,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    '${this.data["humiditySensor"][0]["value"].toString()}%',
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.6)),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                          Card(
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  title: const Text('Luminosidade'),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Icon(
+                                    Icons.light_mode,
+                                    color: Colors.yellow[800],
+                                    size: 30.0,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    '${(double.parse(this.data["lightSensor"][0]["value"].toString()) * 100).toString()}%',
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.6)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Card(
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  title: const Text('Umidade do solo'),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Icon(
+                                    Icons.opacity,
+                                    color: Colors.brown,
+                                    size: 30.0,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    '${this.data["soilMoistureSensor"][0]["value"].toString()}%',
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.6)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 }
