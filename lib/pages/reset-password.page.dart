@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'login.page.dart';
+
+import 'package:http_pro/http.dart' as http;
+import 'package:http_pro/response.dart';
 
 class ResetPasswordPage extends StatelessWidget {
+  TextEditingController login = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +33,7 @@ class ResetPasswordPage extends StatelessWidget {
                       SizedBox(
                         width: 200,
                         height: 200,
-                        child: Image.asset("assets/reset-password-icon.png"),
+                        child: Image.asset("assets/images/Logo.png"),
                       ),
                       SizedBox(
                         height: 20,
@@ -58,6 +64,7 @@ class ResetPasswordPage extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       TextFormField(
+                        controller: login,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           labelText: "E-mail",
@@ -100,7 +107,17 @@ class ResetPasswordPage extends StatelessWidget {
                               ),
                               textAlign: TextAlign.center,
                             ),
-                            onPressed: () {},
+                            onPressed: () async {
+                              Future<String?> res = _apiCall(login.text);
+                              if (await res != null) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginPage(),
+                                  ),
+                                );
+                              }
+                            },
                           ),
                         ),
                       ),
@@ -116,5 +133,16 @@ class ResetPasswordPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+Future<String?> _apiCall(String email) async {
+  Response res = await http.get(
+    "https://smartgarden.onlosant.com/resetpass?email=${email}",
+  );
+  if (res.statusCode == 200 || res.statusCode == 302) {
+    return "True";
+  } else {
+    return null;
   }
 }

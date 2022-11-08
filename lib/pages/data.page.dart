@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'chart.page.dart';
+
 class DataPage extends StatefulWidget {
   const DataPage({Key? key}) : super(key: key);
 
@@ -162,6 +164,23 @@ class _DataPageState extends State<DataPage> {
                                     ),
                                   ),
                                 ),
+                              ],
+                            ),
+                          ),
+                          Card(
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  title: const Text(
+                                    'Umidade do solo',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: chartToRun()),
                               ],
                             ),
                           ),
