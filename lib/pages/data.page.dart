@@ -167,23 +167,6 @@ class _DataPageState extends State<DataPage> {
                               ],
                             ),
                           ),
-                          Card(
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  title: const Text(
-                                    'Umidade do solo',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: chartToRun()),
-                              ],
-                            ),
-                          ),
                         ],
                       ),
                     ),
