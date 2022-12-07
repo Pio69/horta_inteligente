@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:horta_inteligente/pages/data.page.dart';
 import 'package:horta_inteligente/pages/events.page.dart';
+import 'package:horta_inteligente/pages/users-list.page.dart';
 
 void main() {
   runApp(const TabBarDemo());
@@ -13,7 +14,7 @@ class TabBarDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 2,
+        length: 3,
         child: Scaffold(
           appBar: AppBar(
             leading: Navigator.canPop(context)
@@ -29,6 +30,7 @@ class TabBarDemo extends StatelessWidget {
               tabs: [
                 Tab(icon: Icon(Icons.data_thresholding)),
                 Tab(icon: Icon(Icons.apps_outage)),
+                Tab(icon: Icon(Icons.manage_accounts)),
               ],
             ),
             title: Text(
@@ -42,6 +44,7 @@ class TabBarDemo extends StatelessWidget {
             children: [
               DataPage(),
               EventsPage(),
+              UsersList(),
             ],
           ),
         ),
